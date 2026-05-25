@@ -40,6 +40,7 @@ CREATE TABLE horários(
 	id_pagamento INT PRIMARY KEY AUTO_INCREMENT,
     id_materia INT,
     id_aluno INT,
+    metodo_pagamento VARCHAR(10),
     `status` BOOLEAN NOT NULL DEFAULT FALSE,
     data_expiracao DATETIME NOT NULL,
     FOREIGN KEY (id_materia) REFERENCES materias (id_materia),
