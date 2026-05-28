@@ -4,10 +4,10 @@ USE Aulas_particulares;
 CREATE TABLE alunos(
 	id_aluno INT PRIMARY KEY AUTO_INCREMENT,
     login VARCHAR(120) NOT NULL,
-    senha VARCHAR(12) NOT NULL,
+    senha VARCHAR(20) NOT NULL,
     nome VARCHAR(120) NOT NULL,
     sobrenome VARCHAR(120) NOT NULL,
-    nome_social VARCHAR(120) NOT NULL,
+    nome_social VARCHAR(120),
     horario_matricula DATETIME NOT NULL,
     termos_concordados BOOLEAN NOT NULL DEFAULT FALSE);
     
@@ -74,8 +74,8 @@ INSERT INTO horarios(dia_horario, status, id_materia, id_professor, id_aluno) VA
 ("2026-06-17", "OCUPADO", 2,2,2);
 
 INSERT INTO pagamentos(id_materia, id_aluno, metodo_pagamento, status, data_expiracao) VALUES
-("1", "1", "PIX", TRUE, "2026-08-20"),
-("1", "2", "Cartao", TRUE, "2026-08-18");
+(1, 1, "PIX", TRUE, "2026-08-20"),
+(1, 2, "Cartao", TRUE, "2026-08-18");
 
 INSERT INTO logs(tabela_afetada, operacao, descricao, usuario_tipo, data_hora, id_registro) VALUES
 ("alunos", "INSERT", "Cadastro de novo aluno", "aluno", "2026-05-28 10:00:00", 1), 
