@@ -18,23 +18,23 @@ CREATE TABLE professores(
     nome VARCHAR(120) NOT NULL,
     sobrenome VARCHAR(120) NOT NULL);
     
-CREATE TABLE matérias(
+CREATE TABLE materias(
 	id_materia INT PRIMARY KEY AUTO_INCREMENT,
     id_professor INT,
     nome_materia VARCHAR(120) NOT NULL,
-    preco_materia DECIMAL(10.4) NOT NULL,
+    preco_materia DECIMAL(10,4) NOT NULL,
     FOREIGN KEY (id_professor) REFERENCES professores (id_professor));
     
-CREATE TABLE horários(
+CREATE TABLE horarios(
 	id_horario INT PRIMARY KEY AUTO_INCREMENT,
     dia_horario DATETIME,
-    `status` VARCHAR(10) DEFAULT 'LIVRE',
+    `status` VARCHAR(20) DEFAULT 'LIVRE',
     id_materia INT,
     id_professor INT,
     id_aluno INT,
     FOREIGN KEY (id_aluno) REFERENCES alunos (id_aluno),
     FOREIGN KEY (id_professor) REFERENCES professores (id_professor),
-    FOREIGN KEY (id_materia) REFERENCES matérias (id_materia));
+    FOREIGN KEY (id_materia) REFERENCES materias (id_materia));
  
  CREATE TABLE pagamentos(
 	id_pagamento INT PRIMARY KEY AUTO_INCREMENT,
@@ -46,5 +46,49 @@ CREATE TABLE horários(
     FOREIGN KEY (id_materia) REFERENCES materias (id_materia),
     FOREIGN KEY (id_aluno) REFERENCES alunos (id_aluno));
     
-CREATE TABLE logs;
+CREATE TABLE logs(
+    id_log INT PRIMARY KEY AUTO_INCREMENT , 
+    tabela_afetada VARCHAR(50) ,
+    operacao VARCHAR(20) ,
+    descricao TEXT , 
+    usuario_tipo VARCHAR(100) , --- aluno ou professor---
+    id_usuario INT , 
+    data_hora DATETIME ,
+    id_registro INT
+);
+--- INSERIR DADOS ---
+INSERT INTO alunos (login, senha, nome, sobrenome, nome_social, horario_matricula, termos_concordados) VALUES 
+("joice123", "123456", "Joice","Ariane","", "2026-05-28 10:05:00",TRUE),
+("Lucas1511", "151107", "Lucas", "Da mata","", "2026-05-30 09:44:00", TRUE);
+
+INSERT INTO professores (login, senha, nome, sobrenome) VALUES
+("Alexandre453", "45316", "Alexandre", "Monteiro"),
+("Lucia1789", "1789", "Lúcia","Filomena");
+
+INSERT INTO materias (id_professor, nome_materia, preco_materia) VALUES
+(1, "Algébra linear", 50.00),
+(2, "Algoritmos de programação", 60.00);
+
+INSERT INTO horarios(dia_horario, status, id_materia, id_professor, id_aluno) VALUES 
+("2026-06-15", "OCUPADO", 1, 1, 1),
+("2026-06-17", "OCUPADO", 2,2,2);
+
+INSERT INTO pagamentos(id_materia, id_aluno, metodo_pagamento, status, data_expiracao) VALUES
+("1", "1", "PIX", TRUE, "2026-08-20"),
+("1", "2", "Cartao", TRUE, "2026-08-18");
+
+INSERT INTO logs(tabela_afetada, operacao, descricao, usuario_tipo, data_hora, id_registro) VALUES
+("alunos", "INSERT", "Cadastro de novo aluno", "aluno", "2026-05-28 10:00:00", 1), 
+("alunos", "INSERT", "Cadastro de novo aluno", "aluno", "2026-05-28 10:50:00", 2), 
+("professores", "INSERT", "Cadastro de novo professor", "professor", "2026-04-15 09:00:00", 1),
+("pagamentos", "INSERT", "Pagamento realizado via PIX", "aluno", "2026-06-01 10:00:00", 1),
+("horarios", "DELETE", "Aula cancelada pelo aluno", "aluno", "2026-06-02 15:00:00", 2),
+("horarios", "INSERT", "Aula agendada pelo aluno", "aluno", "2026-06-01 14:00:00", 1);
+
+
+
+
+
+
+
 
