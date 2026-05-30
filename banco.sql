@@ -78,16 +78,16 @@ INSERT INTO materias (id_professor, nome_materia, preco_materia) VALUES
 (2, "Algoritmos de programação", 60.00);
 
 INSERT INTO horarios(dia_horario, status, id_materia, id_professor, id_aluno) VALUES 
-("2026-06-15", "OCUPADO", 1, 1, 11),
-("2026-06-17", "OCUPADO", 2,2,12),
-("2026-07-01", "OCUPADO", 2,2,13),
-("2026-07-14", "OCUPADO", 1,1,14);
+("2026-06-15", "OCUPADO", 1, 1, 1),
+("2026-06-17", "OCUPADO", 2,2,2),
+("2026-07-01", "OCUPADO", 2,2,3),
+("2026-07-14", "OCUPADO", 1,1,4);
 
 INSERT INTO pagamentos(id_materia, id_aluno, metodo_pagamento, status, data_expiracao) VALUES
-(1, 11, "PIX", TRUE, "2026-08-20"),
-(2, 12, "Cartao", TRUE, "2026-08-18"),
-(1, 13, "Cartao", TRUE, "2026-09-12"),
-(2, 14, "PIX", TRUE, "2026-09-25");
+(1, 1, "PIX", TRUE, "2026-08-20"),
+(2, 3, "Cartao", TRUE, "2026-08-18"),
+(1, 2, "Cartao", TRUE, "2026-09-12"),
+(2, 4, "PIX", TRUE, "2026-09-25");
 INSERT INTO logs(tabela_afetada, operacao, descricao, usuario_tipo, data_hora, id_registro) VALUES
 ("alunos", "INSERT", "Cadastro de novo aluno", "aluno", "2026-05-28 10:00:00", 1), 
 ("alunos", "INSERT", "Cadastro de novo aluno", "aluno", "2026-05-28 10:50:00", 2), 
@@ -132,3 +132,17 @@ FROM horarios h
 JOIN alunos a ON h.id_aluno = a.id_aluno
 JOIN professores p ON h.id_professor = p.id_professor
 JOIN materias m ON h.id_materia = m.id_materia;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
