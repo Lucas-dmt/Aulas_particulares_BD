@@ -48,6 +48,7 @@ CREATE TABLE horarios(
     id_aluno INT,
     metodo_pagamento VARCHAR(10),
     `status` BOOLEAN NOT NULL DEFAULT FALSE,
+	data_pagamento DATETIME NOT NULL,
     data_expiracao DATETIME NOT NULL,
     FOREIGN KEY (id_materia) REFERENCES materias (id_materia),
     FOREIGN KEY (id_aluno) REFERENCES alunos (id_aluno));
