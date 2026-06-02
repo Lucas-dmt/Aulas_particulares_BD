@@ -9,6 +9,7 @@ CREATE TABLE alunos(
     sobrenome VARCHAR(120) NOT NULL,
     nome_social VARCHAR(120),
     horario_matricula DATETIME NOT NULL,
+	data_criacao DATETIME NOT NULL,
     termos_concordados BOOLEAN NOT NULL DEFAULT FALSE ,
     termos_lgpd BOOLEAN DEFAULT FALSE , 
     data_lgpd DATETIME
@@ -74,15 +75,15 @@ CREATE TABLE logs(
     id_registro INT
 );
 --- INSERIR DADOS ---
-INSERT INTO alunos (login, senha, nome, sobrenome, nome_social, horario_matricula, termos_concordados, termos_lgpd, data_lgpd) VALUES 
-("joice123", "123456", "Joice","Ariane","", "2026-05-28 10:05:00",TRUE, TRUE, "2026-05-28 10:05:00"),
-("Lucas1511", "151107", "Lucas", "Da mata","", "2026-05-30 09:44:00", TRUE, TRUE, "2026-05-30 09:44:00"),
-("Victor3567", "3567", "Victor", "Marucci", "", "2026-05-30 18:00:00", TRUE, TRUE, "2026-05-30 18:00:00"),
-("Eduardo2525", "2525", "Eduardo", "Monteiro", "", "2026-06-15 15:15:00", TRUE, TRUE, "2026-06-15 15:15:00");
+INSERT INTO alunos (login, senha, nome, sobrenome, nome_social, horario_matricula,data_criacao, termos_concordados, termos_lgpd, data_lgpd) VALUES 
+("joice123", "123456", "Joice","Ariane","", "2026-05-28 10:05:00","2026-05-28 10:05:00", TRUE, TRUE, "2026-05-28 10:05:00"),
+("Lucas1511", "151107", "Lucas", "Da mata","", "2026-05-30 09:44:00","2026-05-30 09:44:00", TRUE, TRUE, "2026-05-30 09:44:00"),
+("Victor3567", "3567", "Victor", "Marucci", "", "2026-05-30 18:00:00","2026-05-30 18:00:00", TRUE, TRUE, "2026-05-30 18:00:00"),
+("Eduardo2525", "2525", "Eduardo", "Monteiro", "", "2026-06-15 15:15:00", "2026-06-15 15:15:00", TRUE, TRUE, "2026-06-15 15:15:00");
 
-INSERT INTO professores (login, senha, nome, sobrenome, termos_lgpd, data_lgpd) VALUES
-("Alexandre453", "45316", "Alexandre", "Monteiro", TRUE, "2026-05-28 09:00:00"),
-("Lucia1789", "1789", "Lúcia","Filomena", TRUE, "2026-05-28 09:10:00");
+INSERT INTO professores (login, senha, nome, sobrenome,nome_social,data_criacao,termos_lgpd, data_lgpd) VALUES
+("Alexandre453", "45316", "Alexandre", "Monteiro","2026-05-28 09:00:00", TRUE, "2026-05-28 09:00:00"),
+("Lucia1789", "1789", "Lúcia","Filomena","2026-05-28 09:10:00", TRUE, "2026-05-28 09:10:00");
 
 INSERT INTO materias (id_professor, nome_materia, preco_materia) VALUES
 (1, "Algébra linear", 50.00),
