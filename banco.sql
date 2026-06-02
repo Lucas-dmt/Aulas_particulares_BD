@@ -9,8 +9,8 @@ CREATE TABLE alunos(
     sobrenome VARCHAR(120) NOT NULL,
     nome_social VARCHAR(120),
     horario_matricula DATETIME NOT NULL,
-	data_criacao DATETIME NOT NULL,
     termos_concordados BOOLEAN NOT NULL DEFAULT FALSE ,
+	data_criacao DATETIME NOT NULL , 	
     termos_lgpd BOOLEAN DEFAULT FALSE , 
     data_lgpd DATETIME
     );
@@ -18,10 +18,11 @@ CREATE TABLE alunos(
 CREATE TABLE professores(
 	id_professor INT PRIMARY KEY AUTO_INCREMENT,
     login VARCHAR(120) NOT NULL,
-    senha VARCHAR(12) NOT NULL,
+    senha VARCHAR(20) NOT NULL,
     nome VARCHAR(120) NOT NULL,
     sobrenome VARCHAR(120) NOT NULL ,
 	nome_social VARCHAR(120),
+	chave_pix VARCHAR(120),
     data_criacao DATETIME NOT NULL,
     termos_lgpd BOOLEAN DEFAULT FALSE , 
     data_lgpd DATETIME
@@ -75,25 +76,52 @@ CREATE TABLE logs(
     id_registro INT
 );
 --- INSERIR DADOS ---
-INSERT INTO alunos (login, senha, nome, sobrenome, nome_social, horario_matricula,data_criacao, termos_concordados, termos_lgpd, data_lgpd) VALUES 
-("joice123", "123456", "Joice","Ariane","", "2026-05-28 10:05:00","2026-05-28 10:05:00", TRUE, TRUE, "2026-05-28 10:05:00"),
-("Lucas1511", "151107", "Lucas", "Da mata","", "2026-05-30 09:44:00","2026-05-30 09:44:00", TRUE, TRUE, "2026-05-30 09:44:00"),
-("Victor3567", "3567", "Victor", "Marucci", "", "2026-05-30 18:00:00","2026-05-30 18:00:00", TRUE, TRUE, "2026-05-30 18:00:00"),
-("Eduardo2525", "2525", "Eduardo", "Monteiro", "", "2026-06-15 15:15:00", "2026-06-15 15:15:00", TRUE, TRUE, "2026-06-15 15:15:00");
+INSERT INTO alunos
+(login, senha, nome, sobrenome, nome_social, data_criacao,
+horario_matricula, termos_concordados, termos_lgpd, data_lgpd)
+VALUES
+("joice123", "123456", "Joice","Ariane",NULL ,
+"2026-05-28 10:05:00",
+"2026-05-28 10:05:00",
+TRUE, TRUE, "2026-05-28 10:05:00"),
 
-INSERT INTO professores (login, senha, nome, sobrenome,nome_social,data_criacao,termos_lgpd, data_lgpd) VALUES
-("Alexandre453", "45316", "Alexandre", "Monteiro","2026-05-28 09:00:00", TRUE, "2026-05-28 09:00:00"),
-("Lucia1789", "1789", "Lúcia","Filomena","2026-05-28 09:10:00", TRUE, "2026-05-28 09:10:00");
+("Lucas1511", "151107", "Lucas", "Da Mata",NULL ,
+"2026-05-30 09:44:00",
+"2026-05-30 09:44:00",
+TRUE, TRUE, "2026-05-30 09:44:00"),
+
+("Victor3567", "3567", "Victor", "Marucci", NULL ,
+"2026-05-30 18:00:00",
+"2026-05-30 18:00:00",
+TRUE, TRUE, "2026-05-30 18:00:00"),
+
+("Eduardo2525", "2525", "Eduardo", "Monteiro", NULL ,
+"2026-06-15 15:15:00",
+"2026-06-15 15:15:00",
+TRUE, TRUE, "2026-06-15 15:15:00");
+
+INSERT INTO professores
+(login, senha, nome, sobrenome, nome_social, chave_pix, data_criacao, termos_lgpd, data_lgpd)
+VALUES
+("Alexandre453", "45316", "Alexandre", "Monteiro",
+NULL,
+"8f3c5d12-7a91-4f8e-b3c7-91d2a6f5e123",
+"2026-05-28 09:00:00", TRUE, "2026-05-28 09:00:00"),
+
+("Lucia1789", "1789", "Lúcia", "Filomena",
+"Lulu",
+"2b7e4c89-1d55-4c73-a8f2-6f4b9d1e7a45",
+"2026-05-28 09:10:00", TRUE, "2026-05-28 09:10:00");
 
 INSERT INTO materias (id_professor, nome_materia, preco_materia) VALUES
 (1, "Algébra linear", 50.00),
 (2, "Algoritmos de programação", 60.00);
 
 INSERT INTO horarios(dia_horario, status, id_materia, id_professor, id_aluno) VALUES 
-("2026-06-15", "OCUPADO", 1, 1, 1),
-("2026-06-17", "OCUPADO", 2,2,2),
-("2026-07-01", "OCUPADO", 2,2,3),
-("2026-07-14", "OCUPADO", 1,1,4);
+("2026-06-15 14:00:00", "OCUPADO", 1, 1, 1),
+("2026-06-17 15:05:00", "OCUPADO", 2,2,2),
+("2026-07-01 14:30:00", "OCUPADO", 2,2,3),
+("2026-07-14 17:00:00", "OCUPADO", 1,1,4);
 
 INSERT INTO funcionarios_servicos
 (nome_funcionario, cargo, servico, salario)
@@ -102,18 +130,22 @@ VALUES
 ("Marina Souza","Financeiro","Controle de pagamentos",3200.00),
 ("João Lima","Suporte","Agendamento de aulas",2800.00);
 
-INSERT INTO pagamentos(id_materia, id_aluno, metodo_pagamento, status, data_expiracao) VALUES
-(1, 1, "PIX", TRUE, "2026-08-20"),
-(2, 3, "Cartao", TRUE, "2026-08-18"),
-(1, 2, "Cartao", TRUE, "2026-09-12"),
-(2, 4, "PIX", TRUE, "2026-09-25");
-INSERT INTO logs(tabela_afetada, operacao, descricao, usuario_tipo, data_hora, id_registro) VALUES
-("alunos", "INSERT", "Cadastro de novo aluno", "aluno", "2026-05-28 10:00:00", 1), 
-("alunos", "INSERT", "Cadastro de novo aluno", "aluno", "2026-05-28 10:50:00", 2), 
-("professores", "INSERT", "Cadastro de novo professor", "professor", "2026-04-15 09:00:00", 1),
-("pagamentos", "INSERT", "Pagamento realizado via PIX", "aluno", "2026-06-01 10:00:00", 1),
-("horarios", "DELETE", "Aula cancelada pelo aluno", "aluno", "2026-06-02 15:00:00", 2),
-("horarios", "INSERT", "Aula agendada pelo aluno", "aluno", "2026-06-01 14:00:00", 1);
+INSERT INTO pagamentos
+(id_materia, id_aluno, metodo_pagamento, status, data_pagamento, data_expiracao)
+VALUES
+(1,1,"PIX",TRUE,"2026-06-01","2026-08-20"),
+(2,3,"Cartao",TRUE,"2026-06-02","2026-08-18"),
+(1,2,"Cartao",TRUE,"2026-06-03","2026-09-12"),
+(2,4,"PIX",TRUE,"2026-06-04","2026-09-25");
+
+INSERT INTO logs(tabela_afetada, operacao, descricao, usuario_tipo, id_usuario, data_hora, id_registro) VALUES
+("alunos", "INSERT", "Cadastro de novo aluno", "aluno", 1, "2026-05-28 10:00:00", 1), 
+("alunos", "INSERT", "Cadastro de novo aluno", "aluno", 1, "2026-05-28 10:50:00", 2), 
+("professores", "INSERT", "Cadastro de novo professor","professor", 1, "2026-05-28 09:00:00", 1),
+("pagamentos", "INSERT", "Pagamento realizado via PIX", "aluno", 1, "2026-06-01 10:00:00", 1),
+("horarios", "DELETE", "Aula cancelada pelo aluno", "aluno", 1, "2026-06-02 15:00:00", 2),
+("horarios", "INSERT", "Aula agendada pelo aluno", "aluno", 1, "2026-06-01 14:00:00", 1);
+
 
 --- VISUALIZAR DADOS ---
 SELECT a.nome, a.sobrenome, h.dia_horario, h.status
@@ -163,13 +195,6 @@ SELECT metodo_pagamento, COUNT(*) AS quantidade
 FROM pagamentos
 GROUP BY metodo_pagamento;
 
-
-
-
-
-
-
-
-
-
-
+SELECT COUNT(*) AS quantidade_aulas
+FROM horarios
+WHERE status = 'OCUPADO';
