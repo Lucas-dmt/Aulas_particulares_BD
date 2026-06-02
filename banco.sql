@@ -19,7 +19,9 @@ CREATE TABLE professores(
     login VARCHAR(120) NOT NULL,
     senha VARCHAR(12) NOT NULL,
     nome VARCHAR(120) NOT NULL,
-    sobrenome VARCHAR(120) NOT NULL , 
+    sobrenome VARCHAR(120) NOT NULL ,
+	nome_social VARCHAR(120),
+    data_criacao DATETIME NOT NULL,
     termos_lgpd BOOLEAN DEFAULT FALSE , 
     data_lgpd DATETIME
     );
