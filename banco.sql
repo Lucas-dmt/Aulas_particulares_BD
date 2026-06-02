@@ -38,7 +38,7 @@ CREATE TABLE materias(
 CREATE TABLE horarios(
 	id_horario INT PRIMARY KEY AUTO_INCREMENT,
     dia_horario DATETIME,
-    `status` VARCHAR(20) DEFAULT 'LIVRE',
+    status VARCHAR(20) DEFAULT 'LIVRE',
     id_materia INT,
     id_professor INT,
     id_aluno INT,
@@ -51,7 +51,7 @@ CREATE TABLE horarios(
     id_materia INT,
     id_aluno INT,
     metodo_pagamento VARCHAR(10),
-    `status` BOOLEAN NOT NULL DEFAULT FALSE,
+    status BOOLEAN NOT NULL DEFAULT FALSE,
 	data_pagamento DATETIME NOT NULL,
     data_expiracao DATETIME NOT NULL,
     FOREIGN KEY (id_materia) REFERENCES materias (id_materia),
