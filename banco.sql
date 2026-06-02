@@ -51,7 +51,15 @@ CREATE TABLE horarios(
     data_expiracao DATETIME NOT NULL,
     FOREIGN KEY (id_materia) REFERENCES materias (id_materia),
     FOREIGN KEY (id_aluno) REFERENCES alunos (id_aluno));
-    
+
+CREATE TABLE funcionarios_servicos(
+    id_funcionario INT PRIMARY KEY AUTO_INCREMENT,
+    nome_funcionario VARCHAR(120) NOT NULL,
+    cargo VARCHAR(80),
+    servico VARCHAR(120),
+    salario DECIMAL(10,2)
+);
+
 CREATE TABLE logs(
     id_log INT PRIMARY KEY AUTO_INCREMENT , 
     tabela_afetada VARCHAR(50) ,
@@ -82,6 +90,13 @@ INSERT INTO horarios(dia_horario, status, id_materia, id_professor, id_aluno) VA
 ("2026-06-17", "OCUPADO", 2,2,2),
 ("2026-07-01", "OCUPADO", 2,2,3),
 ("2026-07-14", "OCUPADO", 1,1,4);
+
+INSERT INTO funcionarios_servicos
+(nome_funcionario, cargo, servico, salario)
+VALUES
+("Carlos Silva","Secretário","Atendimento",2500.00),
+("Marina Souza","Financeiro","Controle de pagamentos",3200.00),
+("João Lima","Suporte","Agendamento de aulas",2800.00);
 
 INSERT INTO pagamentos(id_materia, id_aluno, metodo_pagamento, status, data_expiracao) VALUES
 (1, 1, "PIX", TRUE, "2026-08-20"),
@@ -134,7 +149,15 @@ JOIN professores p ON h.id_professor = p.id_professor
 JOIN materias m ON h.id_materia = m.id_materia;
 
 
+SELECT nome, sobrenome, data_criacao
+FROM alunos;
 
+SELECT nome_funcionario, cargo, servico, salario
+FROM funcionarios_servicos;
+
+SELECT metodo_pagamento, COUNT(*) AS quantidade
+FROM pagamentos
+GROUP BY metodo_pagamento;
 
 
 
